@@ -21,6 +21,7 @@ from . import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
+    path('api/', include('feed.api.urls')),
     path('', include('feed.urls')),
 ]
 
