@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d572d26c-8910-447c-b919-de2ea9c72db7" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/fourthpillar/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/fourthpillar/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fourthpillar/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/fourthpillar/urls.py" afterDir="false" />
-    </list>
+    <list default="true" id="d572d26c-8910-447c-b919-de2ea9c72db7" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -86,8 +83,8 @@
       <file leaf-file-name="urls.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/fourthpillar/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="192">
-              <caret line="25" column="35" selection-start-line="25" selection-start-column="35" selection-end-line="25" selection-end-column="35" />
+            <state relative-caret-position="207">
+              <caret line="26" column="33" selection-start-line="26" selection-start-column="10" selection-end-line="26" selection-end-column="33" />
               <folding>
                 <element signature="e#636#668#0" expanded="true" />
               </folding>
@@ -249,16 +246,15 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="32" y="-11" width="1335" height="780" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24732825" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24732825" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Python Console" order="7" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Terminal" order="7" visible="true" weight="0.51170045" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.51170045" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -581,8 +577,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/fourthpillar/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="25" column="35" selection-start-line="25" selection-start-column="35" selection-end-line="25" selection-end-column="35" />
+        <state relative-caret-position="207">
+          <caret line="26" column="33" selection-start-line="26" selection-start-column="10" selection-end-line="26" selection-end-column="33" />
           <folding>
             <element signature="e#636#668#0" expanded="true" />
           </folding>
