@@ -1,7 +1,7 @@
 from django.urls import path
-from .views import AnchorListView, AnchorDetailView
+from .views import AnchorListView, NewsChannelListView
+
 
 urlpatterns = [
-    path('', AnchorListView.as_view()),
-    path('<pk>', AnchorDetailView.as_view()),
+    path('', NewsChannelListView.as_view()),
 ]
