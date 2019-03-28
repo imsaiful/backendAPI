@@ -21,8 +21,10 @@ from . import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
+    path(r'^rest-auth/', include('rest_auth.urls')),
     path('api/', include('feed.api.urls')),
     path('', include('feed.urls')),
+    path('rest-auth/registration/', include('rest_auth.registration.urls'))
 ]
 
 if settings.DEBUG:
