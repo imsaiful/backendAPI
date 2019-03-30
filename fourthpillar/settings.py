@@ -25,7 +25,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'ec2-13-233-199-251.ap-south-1.compute.amazonaws.com','13.233.199.251']
+ALLOWED_HOSTS = ['127.0.0.1', 'ec2-13-233-199-251.ap-south-1.compute.amazonaws.com', '13.233.199.251']
 
 # Application definition
 
@@ -48,7 +48,6 @@ INSTALLED_APPS = [
     'storages',
 ]
 
-
 SITE_ID = 1
 
 MIDDLEWARE = [
@@ -62,8 +61,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-
-CORS_ORIGIN_ALLOW_ALL=True
+CORS_ORIGIN_ALLOW_ALL = True
 
 ROOT_URLCONF = 'fourthpillar.urls'
 
@@ -133,10 +131,15 @@ USE_TZ = True
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
-    'DEFAULT_PERMISSION_CLASSES': [
+    'DEFAULT_PERMISSION_CLASSES': (
+
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
         'rest_framework.authentication.TokenAuthentication',
-    ]
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.SessionAuthentication',
+    ),
 }
 
 STATIC_ROOT = os.path.join(BASE_DIR, "..", "static")
@@ -168,9 +171,8 @@ ADMIN_MEDIA_PREFIX = '/static/admin/'
 
 DEFAULT_FILE_STORAGE = config('DEFAULT_FILE_STORAGE')
 
-
 ACCOUNT_EMAIL_VERIFICATION = 'none'
 
 ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
 
-ACCOUNT_EMAIL_REQUIRED= True
+ACCOUNT_EMAIL_REQUIRED = True
