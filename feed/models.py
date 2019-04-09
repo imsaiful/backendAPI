@@ -32,3 +32,171 @@ class Review(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     text = models.CharField(max_length=500)
     date = models.DateTimeField(default=timezone.now)
+
+
+from django.db import models
+from django.utils import timezone
+from django.contrib.auth.models import User
+from django.conf import settings
+
+
+# Create your models here.
+
+class Republic(models.Model):
+    headline = models.TextField(null=False)
+    link = models.TextField(null=False, unique=True)
+    date = models.DateTimeField(default=timezone.now)
+    category = models.TextField(null=True)
+    sentiment = models.TextField(null=True)
+
+    def __str__(self):
+        return self.headline
+
+    class Meta:
+        ordering = ["-id"]
+
+
+class Indiatoday(models.Model):
+    headline = models.TextField(null=False)
+    link = models.TextField(null=False,unique=True)
+    date = models.DateTimeField(default=timezone.now)
+    category = models.TextField(null=True)
+    sentiment = models.TextField(null=True)
+
+    def __str__(self):
+        return self.headline
+
+    class Meta:
+        ordering = ["-id"]
+
+
+class Ndtv(models.Model):
+    headline = models.TextField(null=False)
+    link = models.TextField(null=False,unique=True)
+    date = models.DateTimeField(default=timezone.now)
+
+    category = models.TextField(null=True)
+    sentiment = models.TextField(null=True)
+
+    def __str__(self):
+        return self.headline
+
+    class Meta:
+        ordering = ["-id"]
+
+
+class Hindustan(models.Model):
+    headline = models.TextField(null=False)
+    link = models.TextField(null=False,unique=True)
+    date = models.DateTimeField(auto_now_add=True)
+    category = models.TextField(null=True)
+    sentiment = models.TextField(null=True)
+
+    def __str__(self):
+        return self.headline
+
+    class Meta:
+        ordering = ["-id"]
+
+
+class Thehindu(models.Model):
+    headline = models.TextField(null=False)
+    link = models.TextField(null=False,unique=True)
+    date = models.DateTimeField(default=timezone.now)
+    category = models.TextField(null=True)
+    sentiment = models.TextField(null=True)
+
+    def __str__(self):
+        return self.headline
+
+    class Meta:
+        ordering = ["-id"]
+
+
+class Zeenews(models.Model):
+    headline = models.TextField(null=False)
+    link = models.TextField(null=False,unique=True)
+    date = models.DateTimeField(default=timezone.now)
+    category = models.TextField(null=True)
+    sentiment = models.TextField(null=True)
+
+    def __str__(self):
+        return self.headline
+
+    class Meta:
+        ordering = ["-id"]
+
+
+class Indianexpress(models.Model):
+    headline = models.TextField(null=False)
+    link = models.TextField(null=False, unique=True)
+    date = models.DateTimeField(default=timezone.now)
+    category = models.TextField(null=True)
+    sentiment = models.TextField(null=True)
+
+    def __str__(self):
+        return self.headline
+
+    class Meta:
+        ordering = ["-id"]
+
+
+class Oneindia(models.Model):
+    headline = models.TextField(null=False)
+    link = models.TextField(null=False, unique=True)
+    date = models.DateTimeField(default=timezone.now)
+    category = models.TextField(null=True)
+    sentiment = models.TextField(null=True)
+
+    def __str__(self):
+        return self.headline
+
+    class Meta:
+        ordering = ["-id"]
+
+
+class Firstpost(models.Model):
+    headline = models.TextField(null=False)
+    link = models.TextField(null=False, unique=True)
+    date = models.DateTimeField(default=timezone.now)
+    category = models.TextField(null=True)
+    sentiment = models.TextField(null=True)
+
+    def __str__(self):
+        return self.headline
+
+    class Meta:
+        ordering = ["-id"]
+
+
+class Dna(models.Model):
+    headline = models.TextField(null=False)
+    link = models.TextField(null=False, unique=True)
+    date = models.DateTimeField(default=timezone.now)
+    category = models.TextField(null=True)
+    sentiment = models.TextField(null=True)
+
+    def __str__(self):
+        return self.headline
+
+    class Meta:
+        ordering = ["-id"]
+
+
+class News18(models.Model):
+    headline = models.TextField(null=False)
+    link = models.TextField(null=False, unique=True)
+    date = models.DateTimeField(default=timezone.now)
+    category = models.TextField(null=True)
+    sentiment = models.TextField(null=True)
+
+    def __str__(self):
+        return self.headline
+
+    class Meta:
+        ordering = ["-id"]
+
+
+class IndexTop10(models.Model):
+    db_keyword = models.TextField(null=False)
+    db_frequency = models.PositiveIntegerField(null=False, default=0)
