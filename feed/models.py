@@ -1,6 +1,7 @@
-from django.db import models
 from django.contrib.auth.models import User
 from django.conf import settings
+from django.db import models
+
 
 # Create your models here.
 from django.utils import timezone
@@ -34,10 +35,7 @@ class Review(models.Model):
     date = models.DateTimeField(default=timezone.now)
 
 
-from django.db import models
-from django.utils import timezone
-from django.contrib.auth.models import User
-from django.conf import settings
+
 
 
 # Create your models here.
