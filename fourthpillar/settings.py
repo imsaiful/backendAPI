@@ -25,7 +25,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'ec2-13-233-199-251.ap-south-1.compute.amazonaws.com', '13.233.199.251']
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -95,7 +95,6 @@ WSGI_APPLICATION = 'fourthpillar.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -106,6 +105,7 @@ DATABASES = {
         'PORT': config('DB_PORT'),
     }
 }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
@@ -179,6 +179,6 @@ DEFAULT_FILE_STORAGE = config('DEFAULT_FILE_STORAGE')
 
 ACCOUNT_EMAIL_VERIFICATION = 'none'
 
-ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
+ACCOUNT_AUTHENTICATION_METHOD = 'username'
 
-ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_REQUIRED =False

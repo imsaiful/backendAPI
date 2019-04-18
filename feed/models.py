@@ -32,7 +32,7 @@ class Review(models.Model):
     channel = models.ForeignKey(News_Channel,on_delete=models.CASCADE)
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     text = models.CharField(max_length=500)
-    date = models.DateTimeField(default=timezone.now)
+    date = models.TextField(default=timezone.now)
 
 
 
@@ -43,7 +43,7 @@ class Review(models.Model):
 class Republic(models.Model):
     headline = models.TextField(null=False)
     link = models.TextField(null=False, unique=True)
-    date = models.DateTimeField(default=timezone.now)
+    date = models.TextField(default=timezone.now)
     category = models.TextField(null=True)
     sentiment = models.TextField(null=True)
 
@@ -54,10 +54,10 @@ class Republic(models.Model):
         ordering = ["-id"]
 
 
-class Indiatoday(models.Model):
+class Indiatv(models.Model):
     headline = models.TextField(null=False)
     link = models.TextField(null=False,unique=True)
-    date = models.DateTimeField(default=timezone.now)
+    date = models.TextField(default=timezone.now)
     category = models.TextField(null=True)
     sentiment = models.TextField(null=True)
 
@@ -71,8 +71,7 @@ class Indiatoday(models.Model):
 class Ndtv(models.Model):
     headline = models.TextField(null=False)
     link = models.TextField(null=False,unique=True)
-    date = models.DateTimeField(default=timezone.now)
-
+    date = models.TextField(default=timezone.now)
     category = models.TextField(null=True)
     sentiment = models.TextField(null=True)
 
@@ -86,7 +85,7 @@ class Ndtv(models.Model):
 class Hindustan(models.Model):
     headline = models.TextField(null=False)
     link = models.TextField(null=False,unique=True)
-    date = models.DateTimeField(auto_now_add=True)
+    date = models.TextField(default=timezone.now)
     category = models.TextField(null=True)
     sentiment = models.TextField(null=True)
 
@@ -100,7 +99,7 @@ class Hindustan(models.Model):
 class Thehindu(models.Model):
     headline = models.TextField(null=False)
     link = models.TextField(null=False,unique=True)
-    date = models.DateTimeField(default=timezone.now)
+    date = models.TextField(default=timezone.now)
     category = models.TextField(null=True)
     sentiment = models.TextField(null=True)
 
@@ -114,7 +113,7 @@ class Thehindu(models.Model):
 class Zeenews(models.Model):
     headline = models.TextField(null=False)
     link = models.TextField(null=False,unique=True)
-    date = models.DateTimeField(default=timezone.now)
+    date = models.TextField(default=timezone.now)
     category = models.TextField(null=True)
     sentiment = models.TextField(null=True)
 
@@ -128,7 +127,7 @@ class Zeenews(models.Model):
 class Indianexpress(models.Model):
     headline = models.TextField(null=False)
     link = models.TextField(null=False, unique=True)
-    date = models.DateTimeField(default=timezone.now)
+    date = models.TextField(default=timezone.now)
     category = models.TextField(null=True)
     sentiment = models.TextField(null=True)
 
@@ -142,7 +141,7 @@ class Indianexpress(models.Model):
 class Oneindia(models.Model):
     headline = models.TextField(null=False)
     link = models.TextField(null=False, unique=True)
-    date = models.DateTimeField(default=timezone.now)
+    date = models.TextField(default=timezone.now)
     category = models.TextField(null=True)
     sentiment = models.TextField(null=True)
 
@@ -156,7 +155,7 @@ class Oneindia(models.Model):
 class Firstpost(models.Model):
     headline = models.TextField(null=False)
     link = models.TextField(null=False, unique=True)
-    date = models.DateTimeField(default=timezone.now)
+    date = models.TextField(default=timezone.now)
     category = models.TextField(null=True)
     sentiment = models.TextField(null=True)
 
@@ -170,7 +169,7 @@ class Firstpost(models.Model):
 class Dna(models.Model):
     headline = models.TextField(null=False)
     link = models.TextField(null=False, unique=True)
-    date = models.DateTimeField(default=timezone.now)
+    date = models.TextField(default=timezone.now)
     category = models.TextField(null=True)
     sentiment = models.TextField(null=True)
 
@@ -181,10 +180,12 @@ class Dna(models.Model):
         ordering = ["-id"]
 
 
+
+
 class News18(models.Model):
     headline = models.TextField(null=False)
     link = models.TextField(null=False, unique=True)
-    date = models.DateTimeField(default=timezone.now)
+    date = models.TextField(default=timezone.now)
     category = models.TextField(null=True)
     sentiment = models.TextField(null=True)
 

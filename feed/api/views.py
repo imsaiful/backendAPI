@@ -1,6 +1,7 @@
 from rest_framework.generics import ListAPIView, RetrieveAPIView
-from feed.models import Anchor,News_Channel,Count,Review
-from .serializers import AnchorSerializers,NewsChannelSerializers,CountSerializers,ReviewSerializers
+from feed.models import Anchor,News_Channel,Count,Review,IndexTop10
+from .serializers import (AnchorSerializers,NewsChannelSerializers,
+                          CountSerializers,ReviewSerializers,TrendingSerializers)
 
 
 class AnchorListView(ListAPIView):
@@ -23,3 +24,7 @@ class CountlListView(ListAPIView):
 class ReviewListView(ListAPIView):
     queryset = Review.objects.all()
     serializer_class = ReviewSerializers
+
+class TrendingListView(ListAPIView):
+    queryset = IndexTop10.objects.all()
+    serializer_class = TrendingSerializers

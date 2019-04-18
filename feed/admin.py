@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from .models import (Anchor,News_Channel,Count,Review,
-    Republic,Ndtv,News18,Indiatoday,Zeenews,
+    Republic,Ndtv,News18,Indiatv,Zeenews,
     Thehindu,Hindustan,IndexTop10,Dna,
     Indianexpress,Oneindia)
 
@@ -17,7 +17,7 @@ admin.site.register(News18)
 admin.site.register(Hindustan)
 admin.site.register(Indianexpress)
 admin.site.register(Oneindia)
-admin.site.register(Indiatoday)
+admin.site.register(Indiatv)
 admin.site.register(Dna)
 admin.site.register(IndexTop10)
 
