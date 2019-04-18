@@ -1,5 +1,7 @@
 from rest_framework import serializers
-from feed.models import Anchor, News_Channel , Count , Review ,Republic,Ndtv,Hindustan,Thehindu,IndexTop10
+from feed.models import Anchor, News_Channel, Count, Review,IndexTop10,\
+    Ndtv,Republic,Indianexpress,Indiatv,Zeenews,\
+    Thehindu,Hindustan,Firstpost,News18,Oneindia
 
 
 class AnchorSerializers(serializers.ModelSerializer):
@@ -25,6 +27,20 @@ class ReviewSerializers(serializers.ModelSerializer):
         model = Review
         fields = ('channel', 'user', 'text', 'website', 'date')
 
+
+
+
+
+
+class TrendingSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = IndexTop10
+        fields = ('db_keyword', 'db_frequency')
+
+
+
+
+
 class RepublicSerializers(serializers.ModelSerializer):
     class Meta:
         model = Republic
@@ -40,10 +56,49 @@ class ZeeNewsSerializers(serializers.ModelSerializer):
         model = Thehindu
         fields = ('headline', 'link', 'date', 'category', 'sentiment')
 
-class TrendingSerializers(serializers.ModelSerializer):
+
+
+class IndianexpressSerializers(serializers.ModelSerializer):
     class Meta:
-        model = IndexTop10
-        fields = ('db_keyword', 'db_frequency')
+        model = Indianexpress
+        fields = ('headline', 'link', 'date', 'category', 'sentiment')
+
+class IndiatvSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = Indiatv
+        fields = ('headline', 'link', 'date', 'category', 'sentiment')
+
+
+class ZeenewsSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = Zeenews
+        fields = ('headline', 'link', 'date', 'category', 'sentiment')
+
+
+class HindustanSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = Hindustan
+        fields = ('headline', 'link', 'date', 'category', 'sentiment')
+
+
+
+
+class News18Serializers(serializers.ModelSerializer):
+    class Meta:
+        model = News18
+        fields = ('headline', 'link', 'date', 'category', 'sentiment')
+
+
+class OneindiaSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = Oneindia
+        fields = ('headline', 'link', 'date', 'category', 'sentiment')
+
+
+class FirstpostSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = Firstpost
+        fields = ('headline', 'link', 'date', 'category', 'sentiment')
 
 
 
