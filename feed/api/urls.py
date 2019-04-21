@@ -8,9 +8,10 @@ from .views import AnchorListView, NewsChannelListView, CountlListView, \
 #    Thehindu,Hindustan,Firstpost,News18,Oneindia
 urlpatterns = [
     path('', NewsChannelListView.as_view()),
-    path('count', CountlListView.as_view()),
     path('review', ReviewListView.as_view()),
     path('trending', TrendingListView.as_view()),
+    path('count/<int:pk>', CountlListView.as_view()),
+    path('count', CountlListView.as_view()),
     # new Api URL
     path('ndtv', NdtvListView.as_view()),
     path('republic', RepublicListView.as_view()),
@@ -21,4 +22,5 @@ urlpatterns = [
     path('firstspot', FirstpostListView.as_view()),
     path('news18', News18ListView.as_view()),
     path('oneindia', OneindiaListView.as_view()),
+    path('zeenews', ZeenewsListView.as_view()),
 ]

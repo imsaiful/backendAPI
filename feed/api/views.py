@@ -1,8 +1,8 @@
 from rest_framework.generics import ListAPIView, RetrieveAPIView
-from feed.models import Anchor,News_Channel,Count,Review,\
-                        IndexTop10,Ndtv,Republic,Indianexpress,Indiatv,Zeenews,Thehindu,Hindustan,Firstpost,News18,Oneindia
-from .serializers import (AnchorSerializers,NewsChannelSerializers,
-                          CountSerializers,ReviewSerializers,TrendingSerializers,
+from feed.models import Anchor, News_Channel, Count, Review, \
+    IndexTop10, Ndtv, Republic, Indianexpress, Indiatv, Zeenews, Thehindu, Hindustan, Firstpost, News18, Oneindia
+from .serializers import (AnchorSerializers, NewsChannelSerializers,
+                          CountSerializers, ReviewSerializers, TrendingSerializers,
                           NdtvSerializers)
 
 
@@ -16,32 +16,40 @@ class NewsChannelListView(ListAPIView):
     serializer_class = NewsChannelSerializers
 
 
-
 class CountlListView(ListAPIView):
-    queryset = Count.objects.all()
     serializer_class = CountSerializers
 
+    def get_queryset(self,*args,**kwargs):
+        queryset=Count.objects.all()
+        userId= self.kwargs.get('pk')
+        print(userId)
+        return queryset.filter(userId=userId)
 
 
 class ReviewListView(ListAPIView):
     queryset = Review.objects.all()
     serializer_class = ReviewSerializers
 
+
 class TrendingListView(ListAPIView):
     queryset = IndexTop10.objects.all()
     serializer_class = TrendingSerializers
+
 
 class NdtvListView(ListAPIView):
     queryset = Ndtv.objects.all()[0:5]
     serializer_class = NdtvSerializers
 
+
 class IndianexpressListView(ListAPIView):
     queryset = Indianexpress.objects.all()[0:5]
     serializer_class = NdtvSerializers
 
+
 class RepublicListView(ListAPIView):
     queryset = Republic.objects.all()[0:5]
     serializer_class = NdtvSerializers
+
 
 class IndiatvListView(ListAPIView):
     queryset = Indiatv.objects.all()[0:5]
@@ -63,7 +71,6 @@ class FirstpostListView(ListAPIView):
     serializer_class = NdtvSerializers
 
 
-
 class News18ListView(ListAPIView):
     queryset = News18.objects.all()[0:5]
     serializer_class = NdtvSerializers
@@ -72,6 +79,7 @@ class News18ListView(ListAPIView):
 class OneindiaListView(ListAPIView):
     queryset = Oneindia.objects.all()[0:5]
     serializer_class = NdtvSerializers
+
 
 class ThehinduListView(ListAPIView):
     queryset = Thehindu.objects.all()[0:5]
