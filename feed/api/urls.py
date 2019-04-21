@@ -4,7 +4,10 @@ from .views import AnchorListView, NewsChannelListView, CountlListView, \
     NdtvListView, RepublicListView, IndianexpressListView, IndiatvListView, \
     ZeenewsListView, ThehinduListView, HindustanListView, FirstpostListView, News18ListView, OneindiaListView,FindKeyWordNews
 
+
+
 urlpatterns = [
+
     path('', NewsChannelListView.as_view()),
     path('review', ReviewListView.as_view()),
     path('trending', TrendingListView.as_view()),

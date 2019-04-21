@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'drf_multiple_model',
 
+
 ]
 
 SITE_ID = 1
@@ -155,8 +156,14 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.SessionAuthentication',
-    )
+        'rest_framework.authentication.TokenAuthentication',
+    ),
 }
+
+
+
+
+
 
 STATIC_ROOT = os.path.join(BASE_DIR, "..", "static")
 STATIC_URL = '/static/'

@@ -13,6 +13,8 @@ from .serializers import (AnchorSerializers, NewsChannelSerializers,
                           )
 
 
+
+
 class AnchorListView(ListAPIView):
     queryset = Anchor.objects.all()
     serializer_class = AnchorSerializers
