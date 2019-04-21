@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'rest_auth.registration',
     'storages',
     'django_extensions',
+    'drf_multiple_model',
 
 ]
 

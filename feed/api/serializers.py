@@ -56,6 +56,10 @@ class ZeeNewsSerializers(serializers.ModelSerializer):
         model = Thehindu
         fields = ('headline', 'link', 'date', 'category', 'sentiment')
 
+class TheHinduSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = Thehindu
+        fields = ('headline', 'link', 'date', 'category', 'sentiment')
 
 
 class IndianexpressSerializers(serializers.ModelSerializer):
@@ -99,6 +103,5 @@ class FirstpostSerializers(serializers.ModelSerializer):
     class Meta:
         model = Firstpost
         fields = ('headline', 'link', 'date', 'category', 'sentiment')
-
 
 

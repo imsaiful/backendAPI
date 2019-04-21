@@ -2,15 +2,21 @@ from django.contrib.auth.models import User
 from django.conf import settings
 from django.db import models
 
-
 # Create your models here.
 from django.utils import timezone
+
 
 class Anchor(models.Model):
     name = models.TextField()
     channel_name = models.CharField(max_length=200)
     wiki = models.TextField()
     image = models.FileField()
+
+    class Meta:
+        ordering = ["-id"]
+
+    def __str__(self):
+        return self.name
 
 
 class News_Channel(models.Model):
@@ -21,21 +27,33 @@ class News_Channel(models.Model):
     total_star = models.PositiveIntegerField(default=0)
     total_user = models.IntegerField()
 
+    class Meta:
+        ordering = ["-id"]
+
+    def __str__(self):
+        return self.name
+
 
 class Count(models.Model):
     userId = models.ForeignKey(User, on_delete=models.CASCADE)
-    channelId = models.ForeignKey(News_Channel,on_delete=models.CASCADE)
+    channelId = models.ForeignKey(News_Channel, on_delete=models.CASCADE)
     rate = models.PositiveIntegerField(default=0)
+
+    class Meta:
+        ordering = ["-id"]
+
+    def __str__(self):
+        return self.userId
 
 
 class Review(models.Model):
-    channel = models.ForeignKey(News_Channel,on_delete=models.CASCADE)
-    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    channel = models.ForeignKey(News_Channel, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     text = models.CharField(max_length=500)
     date = models.TextField(default=timezone.now)
 
-
-
+    def __str__(self):
+        return self.channel
 
 
 # Create your models here.
@@ -56,7 +74,7 @@ class Republic(models.Model):
 
 class Indiatv(models.Model):
     headline = models.TextField(null=False)
-    link = models.TextField(null=False,unique=True)
+    link = models.TextField(null=False, unique=True)
     date = models.TextField(default=timezone.now)
     category = models.TextField(null=True)
     sentiment = models.TextField(null=True)
@@ -70,7 +88,7 @@ class Indiatv(models.Model):
 
 class Ndtv(models.Model):
     headline = models.TextField(null=False)
-    link = models.TextField(null=False,unique=True)
+    link = models.TextField(null=False, unique=True)
     date = models.TextField(default=timezone.now)
     category = models.TextField(null=True)
     sentiment = models.TextField(null=True)
@@ -84,7 +102,7 @@ class Ndtv(models.Model):
 
 class Hindustan(models.Model):
     headline = models.TextField(null=False)
-    link = models.TextField(null=False,unique=True)
+    link = models.TextField(null=False, unique=True)
     date = models.TextField(default=timezone.now)
     category = models.TextField(null=True)
     sentiment = models.TextField(null=True)
@@ -98,7 +116,7 @@ class Hindustan(models.Model):
 
 class Thehindu(models.Model):
     headline = models.TextField(null=False)
-    link = models.TextField(null=False,unique=True)
+    link = models.TextField(null=False, unique=True)
     date = models.TextField(default=timezone.now)
     category = models.TextField(null=True)
     sentiment = models.TextField(null=True)
@@ -112,7 +130,7 @@ class Thehindu(models.Model):
 
 class Zeenews(models.Model):
     headline = models.TextField(null=False)
-    link = models.TextField(null=False,unique=True)
+    link = models.TextField(null=False, unique=True)
     date = models.TextField(default=timezone.now)
     category = models.TextField(null=True)
     sentiment = models.TextField(null=True)
@@ -180,8 +198,6 @@ class Dna(models.Model):
         ordering = ["-id"]
 
 
-
-
 class News18(models.Model):
     headline = models.TextField(null=False)
     link = models.TextField(null=False, unique=True)
@@ -199,3 +215,7 @@ class News18(models.Model):
 class IndexTop10(models.Model):
     db_keyword = models.TextField(null=False)
     db_frequency = models.PositiveIntegerField(null=False, default=0)
+
+    def __str__(self):
+        return self.db_keyword
+
