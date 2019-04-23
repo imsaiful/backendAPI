@@ -25,7 +25,7 @@ class NewsChannelListView(ListAPIView):
     serializer_class = NewsChannelSerializers
 
 
-class CountlListView(UpdateAPIView):
+class CountlListView(ListAPIView):
     serializer_class = CountSerializers
 
     def get_queryset(self, *args, **kwargs):
