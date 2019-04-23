@@ -42,8 +42,7 @@ class Count(models.Model):
     class Meta:
         ordering = ["-id"]
 
-    def __str__(self):
-        return self.userId
+
 
 
 class Review(models.Model):
