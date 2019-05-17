@@ -1,7 +1,7 @@
 from itertools import chain
 from drf_multiple_model.views import ObjectMultipleModelAPIView
 from django.db.models import Q
-from rest_framework.generics import ListAPIView, RetrieveAPIView,UpdateAPIView
+from rest_framework.generics import ListAPIView, RetrieveAPIView, UpdateAPIView
 from feed.models import Anchor, News_Channel, Count, Review, \
     IndexTop10, Ndtv, Republic, Indianexpress, Indiatv, Zeenews, Thehindu, Hindustan, Firstpost, News18, Oneindia
 from .serializers import (AnchorSerializers, NewsChannelSerializers,
@@ -11,8 +11,41 @@ from .serializers import (AnchorSerializers, NewsChannelSerializers,
                           HindustanSerializers, FirstpostSerializers, IndiatvSerializers, TheHinduSerializers
 
                           )
+from django.contrib.auth import authenticate
+from django.views.decorators.csrf import csrf_exempt
+from rest_framework.authtoken.models import Token
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import AllowAny
+from rest_framework.status import (
+    HTTP_400_BAD_REQUEST,
+    HTTP_404_NOT_FOUND,
+    HTTP_200_OK
+)
+from rest_framework.response import Response
 
 
+@csrf_exempt
+@api_view(["POST"])
+@permission_classes((AllowAny,))
+def login(request):
+    username = request.data.get("username")
+    password = request.data.get("password")
+    if username is None or password is None:
+        return Response({'error': 'Please provide both username and password'},
+                        status=HTTP_400_BAD_REQUEST)
+    user = authenticate(username=username, password=password)
+    if not user:
+        return Response({'error': 'Invalid Credentials'},
+                        status=HTTP_404_NOT_FOUND)
+    token, _ = Token.objects.get_or_create(user=user)
+    voting_result = Count.objects.filter(userId=user.id)
+    print(voting_result)
+    channel = {}
+
+    for e in voting_result:
+        channel[str(e.channelId)] = e.rate
+    return Response({'token': token.key, 'user': user.username, 'email': user.email, 'id': user.id, 'stats': channel},
+                    status=HTTP_200_OK)
 
 
 class AnchorListView(ListAPIView):
@@ -22,7 +55,16 @@ class AnchorListView(ListAPIView):
 
 class NewsChannelListView(ListAPIView):
     queryset = News_Channel.objects.all()
-    serializer_class = NewsChannelSerializers
+
+    def get_queryset(self, *args, **kwargs):
+        userId = self.kwargs.get('pk')
+        queryset = [
+            {'queryset': News_Channel.objects.all(),
+             'serializer_class': NewsChannelSerializers},
+            {'queryset': Count.objects.filter(userId=userId),
+             'serializer_class': NdtvSerializers},
+        ]
+        return queryset
 
 
 class CountlListView(ListAPIView):
@@ -48,7 +90,6 @@ class TrendingListView(ListAPIView):
 class NdtvListView(ListAPIView):
     queryset = Ndtv.objects.all()[0:10]
     serializer_class = NdtvSerializers
-
 
 
 class IndianexpressListView(ListAPIView):
@@ -94,6 +135,19 @@ class OneindiaListView(ListAPIView):
 class ThehinduListView(ListAPIView):
     queryset = Thehindu.objects.all()[0:10]
     serializer_class = TheHinduSerializers
+
+
+class NewsChannelListView(ObjectMultipleModelAPIView):
+
+    def get_querylist(self, *args, **kwargs):
+        userId = self.request.user.id
+        queryset = [
+            {'queryset': News_Channel.objects.all(),
+             'serializer_class': NewsChannelSerializers},
+            {'queryset': Count.objects.filter(userId=userId),
+             'serializer_class': CountSerializers},
+        ]
+        return queryset
 
 
 class FindKeyWordNews(ObjectMultipleModelAPIView):

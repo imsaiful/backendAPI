@@ -39,6 +39,9 @@ class Count(models.Model):
     channelId = models.ForeignKey(News_Channel, on_delete=models.CASCADE)
     rate = models.PositiveIntegerField(default=0)
 
+    def __str__(self):
+        return self.channelId.name
+
     class Meta:
         ordering = ["-id"]
 
