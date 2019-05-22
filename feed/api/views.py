@@ -11,6 +11,8 @@ from .serializers import (AnchorSerializers, NewsChannelSerializers,
                           HindustanSerializers, FirstpostSerializers, IndiatvSerializers, TheHinduSerializers
 
                           )
+
+from rest_framework_word_filter import FullWordSearchFilter
 from django.contrib.auth import authenticate
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.authtoken.models import Token
@@ -76,6 +78,16 @@ class CountlListView(ListAPIView):
         print(userId)
         return queryset
 
+class CountlUpdateView(UpdateAPIView):
+    serializer_class = CountSerializers
+    print("in")
+    def get_queryset(self, *args, **kwargs):
+        id = self.kwargs.get('pk')
+        queryset = Count.objects.filter(pk=id)
+
+        return queryset
+
+
 
 class ReviewListView(ListAPIView):
     queryset = Review.objects.all()
@@ -90,6 +102,8 @@ class TrendingListView(ListAPIView):
 class NdtvListView(ListAPIView):
     queryset = Ndtv.objects.all()[0:10]
     serializer_class = NdtvSerializers
+
+
 
 
 class IndianexpressListView(ListAPIView):
@@ -152,32 +166,69 @@ class NewsChannelListView(ObjectMultipleModelAPIView):
 
 class FindKeyWordNews(ObjectMultipleModelAPIView):
     querylist = []
+    filter_backends = (FullWordSearchFilter,)
+    word_fields = ('text',)
 
     def get_querylist(self, *args, **kwargs):
         keyword = self.kwargs.get("keyword")
         print(keyword)
         if keyword:
             queryset = [
-                {'queryset': Republic.objects.filter(Q(headline__icontains=keyword)).order_by('-id'),
+                {'queryset': Republic.objects.filter(Q(headline__icontains=keyword)).order_by('-id')[0:1],
                  'serializer_class': RepublicSerializers},
-                {'queryset': Ndtv.objects.filter(Q(headline__icontains=keyword)).order_by('-id'),
+                {'queryset': Ndtv.objects.filter(Q(headline__icontains=keyword)).order_by('-id')[0:1],
                  'serializer_class': NdtvSerializers},
-                {'queryset': Indiatv.objects.filter(Q(headline__icontains=keyword)).order_by('-id'),
+                {'queryset': Indiatv.objects.filter(Q(headline__icontains=keyword)).order_by('-id')[0:1],
                  'serializer_class': IndiatvSerializers},
-                {'queryset': Hindustan.objects.filter(Q(headline__icontains=keyword)).order_by('-id'),
+                {'queryset': Hindustan.objects.filter(Q(headline__icontains=keyword)).order_by('-id')[0:1],
                  'serializer_class': HindustanSerializers},
-                {'queryset': Thehindu.objects.filter(Q(headline__icontains=keyword)).order_by('-id'),
+                {'queryset': Thehindu.objects.filter(Q(headline__icontains=keyword)).order_by('-id')[0:1],
                  'serializer_class': TheHinduSerializers},
-                {'queryset': Zeenews.objects.filter(Q(headline__icontains=keyword)).order_by('-id'),
+                {'queryset': Zeenews.objects.filter(Q(headline__icontains=keyword)).order_by('-id')[0:1],
                  'serializer_class': ZeeNewsSerializers},
-                {'queryset': News18.objects.filter(Q(headline__icontains=keyword)).order_by('-id'),
+                {'queryset': News18.objects.filter(Q(headline__icontains=keyword)).order_by('-id')[0:1],
                  'serializer_class': News18Serializers},
-                {'queryset': Firstpost.objects.filter(Q(headline__icontains=keyword)).order_by('-id'),
+                {'queryset': Firstpost.objects.filter(Q(headline__icontains=keyword)).order_by('-id')[0:1],
                  'serializer_class': FirstpostSerializers},
-                {'queryset': Indianexpress.objects.filter(Q(headline__icontains=keyword)).order_by('-id'),
+                {'queryset': Indianexpress.objects.filter(Q(headline__icontains=keyword)).order_by('-id')[0:1],
                  'serializer_class': IndianexpressSerializers},
-                {'queryset': Oneindia.objects.filter(Q(headline__icontains=keyword)).order_by('-id'),
+                {'queryset': Oneindia.objects.filter(Q(headline__icontains=keyword)).order_by('-id')[0:1],
                  'serializer_class': OneindiaSerializers},
             ]
 
             return queryset
+
+
+
+
+class FindCategoryNews(ObjectMultipleModelAPIView):
+    querylist = []
+    def get_querylist(self, *args, **kwargs):
+        keyword = self.kwargs.get("keyword")
+        print(keyword)
+        if keyword:
+            queryset = [
+                {'queryset': Republic.objects.filter(category=keyword).order_by('-id')[0:10],
+                 'serializer_class': RepublicSerializers},
+                {'queryset': Ndtv.objects.filter(category=keyword).order_by('-id')[0:10],
+                 'serializer_class': NdtvSerializers},
+                {'queryset': Indiatv.objects.filter(category=keyword).order_by('-id')[0:10],
+                 'serializer_class': IndiatvSerializers},
+                {'queryset': Hindustan.objects.filter(category=keyword).order_by('-id')[0:10],
+                 'serializer_class': HindustanSerializers},
+                {'queryset': Thehindu.objects.filter(category=keyword).order_by('-id')[0:10],
+                 'serializer_class': TheHinduSerializers},
+                {'queryset': Zeenews.objects.filter(category=keyword).order_by('-id')[0:10],
+                 'serializer_class': ZeeNewsSerializers},
+                {'queryset': News18.objects.filter(category=keyword).order_by('-id')[0:10],
+                 'serializer_class': News18Serializers},
+                {'queryset': Firstpost.objects.filter(category=keyword).order_by('-id')[0:10],
+                 'serializer_class': FirstpostSerializers},
+                {'queryset': Indianexpress.objects.filter(category=keyword).order_by('-id')[0:10],
+                 'serializer_class': IndianexpressSerializers},
+                {'queryset': Oneindia.objects.filter(category=keyword).order_by('-id')[0:10],
+                 'serializer_class': OneindiaSerializers},
+            ]
+
+            return queryset
+

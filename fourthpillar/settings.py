@@ -48,7 +48,7 @@ INSTALLED_APPS = [
     'storages',
     'django_extensions',
     'drf_multiple_model',
-
+    'rest_framework_word_filter'
 
 ]
 

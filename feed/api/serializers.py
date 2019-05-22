@@ -19,7 +19,7 @@ class NewsChannelSerializers(serializers.ModelSerializer):
 class CountSerializers(serializers.ModelSerializer):
     class Meta:
         model = Count
-        fields = ('userId', 'channelId', 'rate')
+        fields = ('id','userId', 'channelId', 'rate')
 
 
 class ReviewSerializers(serializers.ModelSerializer):
