@@ -78,15 +78,16 @@ class CountlListView(ListAPIView):
         print(userId)
         return queryset
 
+
 class CountlUpdateView(UpdateAPIView):
     serializer_class = CountSerializers
     print("in")
+
     def get_queryset(self, *args, **kwargs):
         id = self.kwargs.get('pk')
         queryset = Count.objects.filter(pk=id)
 
         return queryset
-
 
 
 class ReviewListView(ListAPIView):
@@ -102,8 +103,6 @@ class TrendingListView(ListAPIView):
 class NdtvListView(ListAPIView):
     queryset = Ndtv.objects.all()[0:10]
     serializer_class = NdtvSerializers
-
-
 
 
 class IndianexpressListView(ListAPIView):
@@ -199,10 +198,9 @@ class FindKeyWordNews(ObjectMultipleModelAPIView):
             return queryset
 
 
-
-
 class FindCategoryNews(ObjectMultipleModelAPIView):
     querylist = []
+
     def get_querylist(self, *args, **kwargs):
         keyword = self.kwargs.get("keyword")
         print(keyword)
@@ -231,4 +229,3 @@ class FindCategoryNews(ObjectMultipleModelAPIView):
             ]
 
             return queryset
-
