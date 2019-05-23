@@ -3,7 +3,7 @@ from .views import AnchorListView, NewsChannelListView, CountlListView, \
     ReviewListView, TrendingListView, \
     NdtvListView, RepublicListView, IndianexpressListView, IndiatvListView, \
     ZeenewsListView, ThehinduListView, HindustanListView, FirstpostListView, News18ListView, OneindiaListView, \
-    FindKeyWordNews,login,CountlUpdateView,FindCategoryNews
+    FindKeyWordNews,login,CountlUpdateView,FindCategoryNews,CategorySerializers
 
 
 
@@ -12,6 +12,7 @@ urlpatterns = [
     path('', NewsChannelListView.as_view()),
     path('review', ReviewListView.as_view()),
     path('login', login),
+    path('category', CategorySerializers.as_view()),
     path('trending', TrendingListView.as_view()),
     path('keyword/<slug:keyword>/', FindKeyWordNews.as_view(), name='keyword'),
     path('news/<slug:keyword>/',FindCategoryNews.as_view(), name='keyword'),

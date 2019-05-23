@@ -3,13 +3,13 @@ from drf_multiple_model.views import ObjectMultipleModelAPIView
 from django.db.models import Q
 from rest_framework.generics import ListAPIView, RetrieveAPIView, UpdateAPIView
 from feed.models import Anchor, News_Channel, Count, Review, \
-    IndexTop10, Ndtv, Republic, Indianexpress, Indiatv, Zeenews, Thehindu, Hindustan, Firstpost, News18, Oneindia
+    IndexTop10, Ndtv, Republic, Indianexpress, Indiatv, Zeenews, Thehindu, Hindustan, Firstpost, News18, Oneindia,CategoryRatio
 from .serializers import (AnchorSerializers, NewsChannelSerializers,
                           CountSerializers, ReviewSerializers, TrendingSerializers,
                           RepublicSerializers, NdtvSerializers, ZeeNewsSerializers,
                           OneindiaSerializers, News18Serializers, IndianexpressSerializers,
-                          HindustanSerializers, FirstpostSerializers, IndiatvSerializers, TheHinduSerializers
-
+                          HindustanSerializers, FirstpostSerializers, IndiatvSerializers,
+                          TheHinduSerializers,CategoryRatioSerializer
                           )
 
 from rest_framework_word_filter import FullWordSearchFilter
@@ -229,3 +229,8 @@ class FindCategoryNews(ObjectMultipleModelAPIView):
             ]
 
             return queryset
+
+
+class CategorySerializers(ListAPIView):
+    queryset = CategoryRatio.objects.all()
+    serializer_class = CategoryRatioSerializer

@@ -1,7 +1,7 @@
 from feed.models import Ndtv, \
     Indiatv, \
     Republic, Indianexpress, Zeenews, \
-    Thehindu, Hindustan, Firstpost, News18, Oneindia
+    Thehindu, Hindustan, Firstpost, News18, Oneindia,CategoryRatio
 
 
 def run():
@@ -243,3 +243,36 @@ def run():
     print("education", round(education / total * 100,2), "%")
     print("lifestyle", round(lifestyle / total * 100,2), "%")
     print("security", round(security / total * 100,2), "%")
+
+    pk=0
+
+    update=CategoryRatio(pk,"accident",round(accident / total * 100,2)).save()
+    pk+=1
+    update=CategoryRatio(pk,"health",round(health / total * 100,2)).save()
+    pk += 1
+    update=CategoryRatio(pk,"world",round(world / total * 100,2)).save()
+    pk += 1
+    update=CategoryRatio(pk,"lifestyle",round(lifestyle / total * 100,2)).save()
+    pk += 1
+    update=CategoryRatio(pk,"pollution",round(pollution / total * 100,2)).save()
+    pk += 1
+    update=CategoryRatio(pk,"pollution",round(security / total * 100,2)).save()
+    pk += 1
+    update=CategoryRatio(pk,"education",round(education / total * 100,2)).save()
+    pk += 1
+    update=CategoryRatio(pk,"entertainment",round(entertainment / total * 100,2)).save()
+    pk += 1
+    update=CategoryRatio(pk,"sports",round(sports / total * 100,2)).save()
+    pk += 1
+    update=CategoryRatio(pk,"politics",round(politics / total * 100,2)).save()
+    pk += 1
+    update=CategoryRatio(pk,"business",round(business / total * 100,2)).save()
+    pk += 1
+    update=CategoryRatio(pk,"terrorism",round(terrorism / total * 100,2)).save()
+    pk += 1
+    update=CategoryRatio(pk,"crime",round(crime / total * 100,2)).save()
+    pk += 1
+    update=CategoryRatio(pk,"employment",round( employment / total * 100,2)).save()
+    pk += 1
+    update=CategoryRatio(pk,"technology",round(technology / total * 100,2)).save()
+    pk+=1

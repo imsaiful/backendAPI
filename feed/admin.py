@@ -3,7 +3,7 @@ from django.contrib import admin
 from .models import (Anchor,News_Channel,Count,Review,
     Republic,Ndtv,News18,Indiatv,Zeenews,
     Thehindu,Hindustan,IndexTop10,Dna,
-    Indianexpress,Oneindia)
+    Indianexpress,Oneindia,CategoryRatio)
 
 admin.site.register(Anchor)
 admin.site.register(News_Channel)
@@ -20,6 +20,7 @@ admin.site.register(Oneindia)
 admin.site.register(Indiatv)
 admin.site.register(Dna)
 admin.site.register(IndexTop10)
+admin.site.register(CategoryRatio)
 
 
 

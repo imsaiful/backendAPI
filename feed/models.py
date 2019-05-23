@@ -46,8 +46,6 @@ class Count(models.Model):
         ordering = ["-id"]
 
 
-
-
 class Review(models.Model):
     channel = models.ForeignKey(News_Channel, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -221,3 +219,10 @@ class IndexTop10(models.Model):
     def __str__(self):
         return self.db_keyword
 
+
+class CategoryRatio(models.Model):
+    category = models.TextField(null=False)
+    value = models.FloatField(default=0)
+
+    def __str__(self):
+        return "category ratio"

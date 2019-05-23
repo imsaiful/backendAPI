@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from feed.models import Anchor, News_Channel, Count, Review,IndexTop10,\
     Ndtv,Republic,Indianexpress,Indiatv,Zeenews,\
-    Thehindu,Hindustan,Firstpost,News18,Oneindia
+    Thehindu,Hindustan,Firstpost,News18,Oneindia,CategoryRatio
 
 
 class AnchorSerializers(serializers.ModelSerializer):
@@ -103,5 +103,10 @@ class FirstpostSerializers(serializers.ModelSerializer):
     class Meta:
         model = Firstpost
         fields = ('headline', 'link', 'date', 'category', 'sentiment')
+
+class CategoryRatioSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CategoryRatio
+        fields = ('category', 'value')
 
 
