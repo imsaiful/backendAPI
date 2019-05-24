@@ -1,6 +1,7 @@
 from itertools import chain
 from drf_multiple_model.views import ObjectMultipleModelAPIView
 from django.db.models import Q
+from rest_framework import permissions
 from rest_framework.generics import ListAPIView, RetrieveAPIView, UpdateAPIView
 from feed.models import Anchor, News_Channel, Count, Review, \
     IndexTop10, Ndtv, Republic, Indianexpress, Indiatv, Zeenews, Thehindu, Hindustan, Firstpost, News18, Oneindia,CategoryRatio
@@ -81,13 +82,22 @@ class CountlListView(ListAPIView):
 
 class CountlUpdateView(UpdateAPIView):
     serializer_class = CountSerializers
-    print("in")
+    permission_classes = (permissions.IsAuthenticated,)
 
-    def get_queryset(self, *args, **kwargs):
-        id = self.kwargs.get('pk')
-        queryset = Count.objects.filter(pk=id)
 
-        return queryset
+    def update(self, request, *args, **kwargs):
+        instance = self.get_object()
+        if instance.userId==self.request.user.id:
+            instance.rate = request.data.get("rate")
+            instance.save()
+
+
+        serializer = self.get_serializer(instance)
+        serializer.is_valid(raise_exception=True)
+        self.perform_update(serializer)
+
+        return Response(serializer.data)
+
 
 
 class ReviewListView(ListAPIView):

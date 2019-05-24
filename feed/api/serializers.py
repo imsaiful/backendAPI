@@ -1,7 +1,8 @@
 from rest_framework import serializers
-from feed.models import Anchor, News_Channel, Count, Review,IndexTop10,\
-    Ndtv,Republic,Indianexpress,Indiatv,Zeenews,\
-    Thehindu,Hindustan,Firstpost,News18,Oneindia,CategoryRatio
+from rest_framework.serializers import HyperlinkedModelSerializer
+from feed.models import Anchor, News_Channel, Count, Review, IndexTop10, \
+    Ndtv, Republic, Indianexpress, Indiatv, Zeenews, \
+    Thehindu, Hindustan, Firstpost, News18, Oneindia, CategoryRatio
 
 
 class AnchorSerializers(serializers.ModelSerializer):
@@ -13,13 +14,14 @@ class AnchorSerializers(serializers.ModelSerializer):
 class NewsChannelSerializers(serializers.ModelSerializer):
     class Meta:
         model = News_Channel
-        fields = ('id','name', 'info', 'image', 'website', 'total_star', 'total_user')
+        fields = ('id', 'name', 'info', 'image', 'website', 'total_star', 'total_user')
 
 
 class CountSerializers(serializers.ModelSerializer):
     class Meta:
         model = Count
-        fields = ('id','userId', 'channelId', 'rate')
+        fields = ('id', 'userId', 'channelId', 'rate')
+
 
 
 class ReviewSerializers(serializers.ModelSerializer):
@@ -28,17 +30,10 @@ class ReviewSerializers(serializers.ModelSerializer):
         fields = ('channel', 'user', 'text', 'website', 'date')
 
 
-
-
-
-
 class TrendingSerializers(serializers.ModelSerializer):
     class Meta:
         model = IndexTop10
         fields = ('db_keyword', 'db_frequency')
-
-
-
 
 
 class RepublicSerializers(serializers.ModelSerializer):
@@ -46,15 +41,18 @@ class RepublicSerializers(serializers.ModelSerializer):
         model = Republic
         fields = ('headline', 'link', 'date', 'category', 'sentiment')
 
+
 class NdtvSerializers(serializers.ModelSerializer):
     class Meta:
-        model =Ndtv
+        model = Ndtv
         fields = ('headline', 'link', 'date', 'category', 'sentiment')
+
 
 class ZeeNewsSerializers(serializers.ModelSerializer):
     class Meta:
         model = Thehindu
         fields = ('headline', 'link', 'date', 'category', 'sentiment')
+
 
 class TheHinduSerializers(serializers.ModelSerializer):
     class Meta:
@@ -66,6 +64,7 @@ class IndianexpressSerializers(serializers.ModelSerializer):
     class Meta:
         model = Indianexpress
         fields = ('headline', 'link', 'date', 'category', 'sentiment')
+
 
 class IndiatvSerializers(serializers.ModelSerializer):
     class Meta:
@@ -85,8 +84,6 @@ class HindustanSerializers(serializers.ModelSerializer):
         fields = ('headline', 'link', 'date', 'category', 'sentiment')
 
 
-
-
 class News18Serializers(serializers.ModelSerializer):
     class Meta:
         model = News18
@@ -104,9 +101,8 @@ class FirstpostSerializers(serializers.ModelSerializer):
         model = Firstpost
         fields = ('headline', 'link', 'date', 'category', 'sentiment')
 
+
 class CategoryRatioSerializer(serializers.ModelSerializer):
     class Meta:
         model = CategoryRatio
         fields = ('category', 'value')
-
-
