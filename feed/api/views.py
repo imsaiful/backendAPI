@@ -1,16 +1,18 @@
 from itertools import chain
 from drf_multiple_model.views import ObjectMultipleModelAPIView
 from django.db.models import Q
+from django.contrib.auth.models import User
 from rest_framework import permissions
 from rest_framework.generics import ListAPIView, RetrieveAPIView, UpdateAPIView
 from feed.models import Anchor, News_Channel, Count, Review, \
-    IndexTop10, Ndtv, Republic, Indianexpress, Indiatv, Zeenews, Thehindu, Hindustan, Firstpost, News18, Oneindia,CategoryRatio
+    IndexTop10, Ndtv, Republic, Indianexpress, Indiatv, Zeenews, Thehindu, Hindustan, Firstpost, News18, Oneindia, \
+    CategoryRatio
 from .serializers import (AnchorSerializers, NewsChannelSerializers,
                           CountSerializers, ReviewSerializers, TrendingSerializers,
                           RepublicSerializers, NdtvSerializers, ZeeNewsSerializers,
                           OneindiaSerializers, News18Serializers, IndianexpressSerializers,
                           HindustanSerializers, FirstpostSerializers, IndiatvSerializers,
-                          TheHinduSerializers,CategoryRatioSerializer
+                          TheHinduSerializers, CategoryRatioSerializer
                           )
 
 from rest_framework_word_filter import FullWordSearchFilter
@@ -40,6 +42,19 @@ def login(request):
     if not user:
         return Response({'error': 'Invalid Credentials'},
                         status=HTTP_404_NOT_FOUND)
+    i = 1
+    for i in range(1, 11):
+        news_obj = News_Channel.objects.get(id=i)
+        uid = User.objects.get(username=username)
+        obj = Count.objects.filter(userId=uid, channelId=news_obj).count()
+        print(i, " ", obj)
+        if obj==0:
+            print("id===", user.id)
+            o = Count.objects.create(userId=uid, channelId=news_obj,
+                                     rate=0)
+            o.save()
+        i += 1
+
     token, _ = Token.objects.get_or_create(user=user)
     voting_result = Count.objects.filter(userId=user.id)
     print(voting_result)
@@ -82,22 +97,36 @@ class CountlListView(ListAPIView):
 
 class CountlUpdateView(UpdateAPIView):
     serializer_class = CountSerializers
-    permission_classes = (permissions.IsAuthenticated,)
+    print("in")
 
+    def get_queryset(self, *args, **kwargs):
+        id = self.kwargs.get('pk')
+        print(id)
+        print(self.request.user)
+        queryset = Count.objects.filter(pk=id)
 
-    def update(self, request, *args, **kwargs):
-        instance = self.get_object()
-        if instance.userId==self.request.user.id:
-            instance.rate = request.data.get("rate")
-            instance.save()
+        return queryset
 
+    # 'CountlUpdateView' should either include a `serializer_class` attribute, or override the `get_serializer_class()` method.
 
-        serializer = self.get_serializer(instance)
-        serializer.is_valid(raise_exception=True)
-        self.perform_update(serializer)
-
-        return Response(serializer.data)
-
+    # def get_queryset(self, *args, **kwargs):
+    #     userId = self.kwargs.get('pk')
+    #     queryset = Count.objects.filter(userId=userId)
+    #     print(userId)
+    #     return queryset
+    #
+    # def update(self, request, *args, **kwargs):
+    #     instance = self.get_object()
+    #     if instance.userId==self.request.user.id:
+    #         instance.rate = request.data.get("rate")
+    #         instance.save()
+    #
+    #
+    #     serializer = self.get_serializer(instance)
+    #     serializer.is_valid(raise_exception=True)
+    #     self.perform_update(serializer)
+    #
+    #     return Response(serializer.data)
 
 
 class ReviewListView(ListAPIView):
