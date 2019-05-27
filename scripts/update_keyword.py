@@ -1,5 +1,5 @@
-from feed.models import Republic, Ndtv, \
-    Indiatv, Hindustan, Thehindu, Zeenews, IndexTop10,\
+from feed.models import  Ndtv, \
+    IndexTop10,\
     Republic, Indianexpress, Indiatv, Zeenews, \
     Thehindu, Hindustan, Firstpost, News18, Oneindia
 import nltk
