@@ -1,15 +1,15 @@
 from django.urls import path
-from .views import AnchorListView, NewsChannelListView, CountlListView, \
+from .views import  NewsChannelListView, CountlListView, \
     ReviewListView, TrendingListView, \
     NdtvListView, RepublicListView, IndianexpressListView, IndiatvListView, \
     ZeenewsListView, ThehinduListView, HindustanListView, FirstpostListView, News18ListView, OneindiaListView, \
-    FindKeyWordNews,login,CountlUpdateView,FindCategoryNews,CategorySerializers
+    FindKeyWordNews,login,CountlUpdateView,FindCategoryNews,CategorySerializers,JlistView,JCountlListView,JCountlUpdateView
 
 
 
 urlpatterns = [
     path('', NewsChannelListView.as_view()),
-    path('anchor', AnchorListView.as_view()),
+    path('jlist', JlistView.as_view()),
     path('review', ReviewListView.as_view()),
     path('login', login),
     path('category', CategorySerializers.as_view()),
@@ -18,6 +18,8 @@ urlpatterns = [
     path('news/<slug:keyword>/',FindCategoryNews.as_view(), name='keyword'),
     path('count/<int:pk>', CountlListView.as_view()),
     path('count/<int:pk>/update/', CountlUpdateView.as_view()),
+    path('jcount/<int:pk>', JCountlListView.as_view()),
+    path('jcount/<int:pk>/update/', JCountlUpdateView.as_view()),
     path('vote', CountlUpdateView.as_view()),
     path('ndtv', NdtvListView.as_view()),
     path('republic', RepublicListView.as_view()),

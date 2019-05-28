@@ -1,11 +1,12 @@
 from django.contrib import admin
 
-from .models import (Anchor,News_Channel,Count,Review,
+from .models import (News_Channel,Count,Review,
     Republic,Ndtv,News18,Indiatv,Zeenews,
     Thehindu,Hindustan,IndexTop10,Dna,
-    Indianexpress,Oneindia,CategoryRatio)
+    Indianexpress,Oneindia,CategoryRatio,Jlist,JStarList)
 
-admin.site.register(Anchor)
+admin.site.register(Jlist)
+admin.site.register(JStarList)
 admin.site.register(News_Channel)
 admin.site.register(Count)
 admin.site.register(Review)

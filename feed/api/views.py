@@ -4,15 +4,15 @@ from django.db.models import Q
 from django.contrib.auth.models import User
 from rest_framework import permissions
 from rest_framework.generics import ListAPIView, RetrieveAPIView, UpdateAPIView
-from feed.models import Anchor, News_Channel, Count, Review, \
+from feed.models import  News_Channel, Count, Review, \
     IndexTop10, Ndtv, Republic, Indianexpress, Indiatv, Zeenews, Thehindu, Hindustan, Firstpost, News18, Oneindia, \
-    CategoryRatio
-from .serializers import (AnchorSerializers, NewsChannelSerializers,
+    CategoryRatio,Jlist,JStarList
+from .serializers import ( NewsChannelSerializers,
                           CountSerializers, ReviewSerializers, TrendingSerializers,
                           RepublicSerializers, NdtvSerializers, ZeeNewsSerializers,
                           OneindiaSerializers, News18Serializers, IndianexpressSerializers,
                           HindustanSerializers, FirstpostSerializers, IndiatvSerializers,
-                          TheHinduSerializers, CategoryRatioSerializer
+                          TheHinduSerializers, CategoryRatioSerializer,JlistSerializers,JCountSerializers
                           )
 
 from rest_framework_word_filter import FullWordSearchFilter
@@ -54,6 +54,18 @@ def login(request):
                                      rate=0)
             o.save()
         i += 1
+    n=Jlist.objects.all().count()
+
+    for i in range(1, n+1):
+        j_obj = Jlist.objects.get(id=i)
+        uid = User.objects.get(username=username)
+        obj = JStarList.objects.filter(userId=uid, anchorId=j_obj).count()
+        if obj==0:
+            print("id===", user.id)
+            o = JStarList.objects.create(userId=uid, anchorId=j_obj,
+                                     rate=0)
+            o.save()
+        i += 1
 
     token, _ = Token.objects.get_or_create(user=user)
     voting_result = Count.objects.filter(userId=user.id)
@@ -66,9 +78,9 @@ def login(request):
                     status=HTTP_200_OK)
 
 
-class AnchorListView(ListAPIView):
-    queryset = Anchor.objects.all()
-    serializer_class = AnchorSerializers
+class JlistView(ListAPIView):
+    queryset = Jlist.objects.all()
+    serializer_class = JlistSerializers
 
 
 class NewsChannelListView(ListAPIView):
@@ -104,6 +116,27 @@ class CountlUpdateView(UpdateAPIView):
         print(id)
         print(self.request.user)
         queryset = Count.objects.filter(pk=id)
+
+        return queryset
+
+class JCountlListView(ListAPIView):
+    serializer_class = JCountSerializers
+
+    def get_queryset(self, *args, **kwargs):
+        userId = self.kwargs.get('pk')
+        queryset = JStarList.objects.filter(userId=userId)
+        print(userId)
+        return queryset
+
+class JCountlUpdateView(UpdateAPIView):
+    serializer_class = JCountSerializers
+    print("in")
+
+    def get_queryset(self, *args, **kwargs):
+        id = self.kwargs.get('pk')
+        print(id)
+        print(self.request.user)
+        queryset = JStarList.objects.filter(pk=id)
 
         return queryset
 

@@ -1,22 +1,6 @@
 from django.contrib.auth.models import User
-from django.conf import settings
 from django.db import models
-
-# Create your models here.
 from django.utils import timezone
-
-
-class Anchor(models.Model):
-    name = models.TextField()
-    channel_name = models.CharField(max_length=200)
-    wiki = models.TextField()
-    image = models.FileField()
-
-    class Meta:
-        ordering = ["-id"]
-
-    def __str__(self):
-        return self.name
 
 
 class News_Channel(models.Model):
@@ -34,6 +18,21 @@ class News_Channel(models.Model):
         return self.name
 
 
+class Jlist(models.Model):
+    name = models.TextField()
+    news_channel=models.ForeignKey(News_Channel, on_delete=models.CASCADE,default=None)
+    wiki = models.TextField()
+    image = models.FileField()
+    total_star = models.PositiveIntegerField(default=0)
+    total_user = models.IntegerField(default=1)
+
+    class Meta:
+        ordering = ["-id"]
+
+    def __str__(self):
+        return self.name
+
+
 class Count(models.Model):
     userId = models.ForeignKey(User, on_delete=models.CASCADE)
     channelId = models.ForeignKey(News_Channel, on_delete=models.CASCADE)
@@ -41,6 +40,18 @@ class Count(models.Model):
 
     def __str__(self):
         return self.channelId.name
+
+    class Meta:
+        ordering = ["-id"]
+
+
+class JStarList(models.Model):
+    userId = models.ForeignKey(User, on_delete=models.CASCADE)
+    anchorId = models.ForeignKey(Jlist, on_delete=models.CASCADE)
+    rate = models.PositiveIntegerField(default=0)
+
+    def __str__(self):
+        return self.anchorId.name
 
     class Meta:
         ordering = ["-id"]
