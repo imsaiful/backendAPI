@@ -8,8 +8,8 @@ from .views import AnchorListView, NewsChannelListView, CountlListView, \
 
 
 urlpatterns = [
-
     path('', NewsChannelListView.as_view()),
+    path('anchor', AnchorListView.as_view()),
     path('review', ReviewListView.as_view()),
     path('login', login),
     path('category', CategorySerializers.as_view()),
