@@ -6,10 +6,10 @@ from feed.models import User
 
 
 def run():
-    for i in range(1, 11):
+    for i in range(1, 15):
         news_channel = Count.objects.filter(channelId=i)
         total_rate = 0
-        total_user = 0
+        total_user = 1
         for rate in news_channel:
             total_rate += rate.rate
             if rate.rate > 0:

@@ -43,7 +43,7 @@ def login(request):
         return Response({'error': 'Invalid Credentials'},
                         status=HTTP_404_NOT_FOUND)
     i = 1
-    for i in range(1, 11):
+    for i in range(1, 15):
         news_obj = News_Channel.objects.get(id=i)
         uid = User.objects.get(username=username)
         obj = Count.objects.filter(userId=uid, channelId=news_obj).count()
