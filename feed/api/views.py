@@ -86,7 +86,7 @@ class JlistView(ObjectMultipleModelAPIView):
             {'queryset': Jlist.objects.all(),
              'serializer_class': JlistSerializers},
             {'queryset': JStarList.objects.filter(userId=userId),
-             'serializer_class': JStarList}
+             'serializer_class': JCountSerializers }
         ]
         return queryset
 
