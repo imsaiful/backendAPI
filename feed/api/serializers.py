@@ -1,14 +1,8 @@
 from rest_framework import serializers
 from rest_framework.serializers import HyperlinkedModelSerializer
-from feed.models import Jlist,JStarList, News_Channel, Count, Review, IndexTop10, \
+from feed.models import Jlist, JStarList, News_Channel, Count, Review, IndexTop10, \
     Ndtv, Republic, Indianexpress, Indiatv, Zeenews, \
     Thehindu, Hindustan, Firstpost, News18, Oneindia, CategoryRatio
-
-
-class JlistSerializers(serializers.ModelSerializer):
-    class Meta:
-        model = Jlist
-        fields = ('id','name', 'news_channel','image','wiki','total_star', 'total_user')
 
 
 class NewsChannelSerializers(serializers.ModelSerializer):
@@ -17,16 +11,22 @@ class NewsChannelSerializers(serializers.ModelSerializer):
         fields = ('id', 'name', 'info', 'image', 'website', 'total_star', 'total_user')
 
 
+class JlistSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = Jlist
+        fields = ('id', 'name', 'news_channel', 'wiki', 'image', 'total_star', 'total_user')
+
+
 class CountSerializers(serializers.ModelSerializer):
     class Meta:
         model = Count
         fields = ('id', 'userId', 'channelId', 'rate')
 
+
 class JCountSerializers(serializers.ModelSerializer):
     class Meta:
         model = JStarList
         fields = ('id', 'userId', 'anchorId', 'rate')
-
 
 
 class ReviewSerializers(serializers.ModelSerializer):
