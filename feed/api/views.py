@@ -1,6 +1,6 @@
 from itertools import chain
 from drf_multiple_model.views import ObjectMultipleModelAPIView
-from django.db.models import Q
+from django.db.models import Q, F
 from django.contrib.auth.models import User
 from rest_framework import permissions
 from rest_framework.generics import ListAPIView, RetrieveAPIView, UpdateAPIView
@@ -12,7 +12,8 @@ from .serializers import (NewsChannelSerializers,
                           RepublicSerializers, NdtvSerializers, ZeeNewsSerializers,
                           OneindiaSerializers, News18Serializers, IndianexpressSerializers,
                           HindustanSerializers, FirstpostSerializers, IndiatvSerializers,
-                          TheHinduSerializers, CategoryRatioSerializer, JlistSerializers, JCountSerializers
+                          TheHinduSerializers, CategoryRatioSerializer,
+                          JlistSerializers, JCountSerializers,RankNewsChannelSerializers
                           )
 
 from rest_framework_word_filter import FullWordSearchFilter
@@ -316,3 +317,8 @@ class FindCategoryNews(ObjectMultipleModelAPIView):
 class CategorySerializers(ListAPIView):
     queryset = CategoryRatio.objects.all()
     serializer_class = CategoryRatioSerializer
+
+
+class NewsChannelRankApi(ListAPIView):
+    queryset = News_Channel.objects.annotate(stars_per_user=F('total_star') / F('total_user')).order_by('-stars_per_user')[0:10]
+    serializer_class = RankNewsChannelSerializers

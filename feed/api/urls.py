@@ -3,7 +3,8 @@ from .views import  NewsChannelListView, CountlListView, \
     ReviewListView, TrendingListView, \
     NdtvListView, RepublicListView, IndianexpressListView, IndiatvListView, \
     ZeenewsListView, ThehinduListView, HindustanListView, FirstpostListView, News18ListView, OneindiaListView, \
-    FindKeyWordNews,login,CountlUpdateView,FindCategoryNews,CategorySerializers,JlistView,JCountlListView,JCountlUpdateView
+    FindKeyWordNews,login,CountlUpdateView,FindCategoryNews,\
+    CategorySerializers,JlistView,JCountlListView,JCountlUpdateView,NewsChannelRankApi
 
 
 
@@ -31,4 +32,5 @@ urlpatterns = [
     path('news18', News18ListView.as_view()),
     path('oneindia', OneindiaListView.as_view()),
     path('zeenews', ZeenewsListView.as_view()),
+    path('rankchannel', NewsChannelRankApi.as_view()),
 ]

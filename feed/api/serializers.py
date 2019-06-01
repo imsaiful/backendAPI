@@ -10,6 +10,11 @@ class NewsChannelSerializers(serializers.ModelSerializer):
         model = News_Channel
         fields = ('id', 'name', 'info', 'image', 'website', 'total_star', 'total_user')
 
+class RankNewsChannelSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = News_Channel
+        fields = ('id', 'name','total_star', 'total_user')
+
 
 class JlistSerializers(serializers.ModelSerializer):
     class Meta:
