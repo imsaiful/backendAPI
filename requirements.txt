@@ -16,7 +16,7 @@ docutils==0.14
 idna==2.8
 jmespath==0.9.4
 Markdown==3.1
-nltk==3.4.1
+nltk==3.6.3
 numpy==1.16.2
 oauthlib==3.0.1
 psycopg2==2.7.7
