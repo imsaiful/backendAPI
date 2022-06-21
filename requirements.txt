@@ -17,7 +17,7 @@ idna==2.8
 jmespath==0.9.4
 Markdown==3.1
 nltk==3.4.1
-numpy==1.16.2
+numpy==1.22.0
 oauthlib==3.0.1
 psycopg2==2.7.7
 psycopg2-binary==2.7.7
